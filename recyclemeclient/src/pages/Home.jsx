@@ -5,30 +5,46 @@ class HomePage extends Component {
     return (
       <div>
         <nav
-          class="navbar is-success"
+          className="navbar is-success"
           role="navigation"
           aria-label="main navigation"
         >
-          <div class="navbar-brand">
-            <a class="navbar-item" href="/">
+          <div className="navbar-brand">
+            <a className="navbar-item" href="/">
               RecycleMe ♻️️
             </a>
           </div>
+
+          {/*<div id="navbarBasicExample" className="navbar-menu" />
+          
+            <div className="navbar-end">
+              <div className="navbar-item">
+                <div className="buttons">
+                  <a className="button is-primary">
+                    <strong>Sign up</strong>
+                  </a>
+                  <a className="button is-light">Log in</a>
+                </div>
+              </div>
+            </div>
+            */}
         </nav>
 
-        <div class="field has-addons">
-          <div class="control">
-            <input
-              class="input"
-              type="text"
-              placeholder="Find a Recycling Center"
-            />
+        <form>
+          <div className="field has-addons">
+            <div className="control">
+              <input
+                className="input"
+                type="text"
+                placeholder="Find a Recycling Center"
+              />
+            </div>
+            <div className="control" />
           </div>
-          <div class="control" />
-        </div>
-        <div>
-          <a class="button is-info">Get Recycling!</a>
-        </div>
+          <div>
+            <a className="button is-info">Get Recycling!</a>
+          </div>
+        </form>
       </div>
     );
   }
