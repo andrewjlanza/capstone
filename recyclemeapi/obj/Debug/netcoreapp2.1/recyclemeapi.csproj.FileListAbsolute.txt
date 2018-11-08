@@ -1,0 +1,14 @@
+/Users/andrewlanza/sdg/capstone/recyclemeapi/bin/Debug/netcoreapp2.1/recyclemeapi.deps.json
+/Users/andrewlanza/sdg/capstone/recyclemeapi/bin/Debug/netcoreapp2.1/recyclemeapi.runtimeconfig.json
+/Users/andrewlanza/sdg/capstone/recyclemeapi/bin/Debug/netcoreapp2.1/recyclemeapi.runtimeconfig.dev.json
+/Users/andrewlanza/sdg/capstone/recyclemeapi/bin/Debug/netcoreapp2.1/recyclemeapi.dll
+/Users/andrewlanza/sdg/capstone/recyclemeapi/bin/Debug/netcoreapp2.1/recyclemeapi.pdb
+/Users/andrewlanza/sdg/capstone/recyclemeapi/obj/Debug/netcoreapp2.1/recyclemeapi.csprojAssemblyReference.cache
+/Users/andrewlanza/sdg/capstone/recyclemeapi/obj/Debug/netcoreapp2.1/recyclemeapi.csproj.CoreCompileInputs.cache
+/Users/andrewlanza/sdg/capstone/recyclemeapi/obj/Debug/netcoreapp2.1/recyclemeapi.RazorAssemblyInfo.cache
+/Users/andrewlanza/sdg/capstone/recyclemeapi/obj/Debug/netcoreapp2.1/recyclemeapi.RazorAssemblyInfo.cs
+/Users/andrewlanza/sdg/capstone/recyclemeapi/obj/Debug/netcoreapp2.1/recyclemeapi.AssemblyInfoInputs.cache
+/Users/andrewlanza/sdg/capstone/recyclemeapi/obj/Debug/netcoreapp2.1/recyclemeapi.AssemblyInfo.cs
+/Users/andrewlanza/sdg/capstone/recyclemeapi/obj/Debug/netcoreapp2.1/recyclemeapi.RazorTargetAssemblyInfo.cache
+/Users/andrewlanza/sdg/capstone/recyclemeapi/obj/Debug/netcoreapp2.1/recyclemeapi.dll
+/Users/andrewlanza/sdg/capstone/recyclemeapi/obj/Debug/netcoreapp2.1/recyclemeapi.pdb
