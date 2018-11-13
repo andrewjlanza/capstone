@@ -45,6 +45,53 @@ class HomePage extends Component {
             <a className="button is-info">Get Recycling!</a>
           </div>
         </form>
+        <section className="recycle-me-list">
+          <div class="card">
+            {/*<div class="card-image">
+              <figure class="image is-4by3">
+                <img
+                  src="https://bulma.io/images/placeholders/1280x960.png"
+                  alt="Placeholder image"
+                />
+              </figure>
+          </div>*/}
+            <div class="card-content">
+              <div class="media">
+                <div class="media-left">
+                  <figure class="image is-48x48">
+                    <img
+                      src="https://bulma.io/images/placeholders/96x96.png"
+                      alt="Placeholder image"
+                    />
+                  </figure>
+                </div>
+                <div class="media-content">
+                  <p class="title is-4">Pinellas County Solid Waste</p>
+                  <p class="subtitle is-6">
+                    {/*<PhoneNumber number="(727)-464-7500" />*/}
+                    <a
+                      onClick={this._hideMenu}
+                      className="linkContact"
+                      href="tel://17276199736"
+                    >
+                      <li className="menu-contact">+1 (727) 619-9736</li>
+                    </a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="content">
+                <ul>
+                  <li>Address:</li>
+                  <li>Hours:</li>
+                  <li>Recycles:</li>
+                </ul>
+                <br />
+                <a href="/details">More details</a>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     );
   }
