@@ -1,6 +1,21 @@
 import React, { Component } from "react";
-
+import axios from "axios";
 class HomePage extends Component {
+  state = {
+    Location: []
+  };
+
+  componentDidMount() {
+    axios.get("https://localhost:5001/api/locations").then(json => {
+      console.log({
+        json
+      });
+      this.setState({
+        Location: json.data
+      });
+    });
+  }
+
   render() {
     return (
       <div>
@@ -55,19 +70,19 @@ class HomePage extends Component {
                 />
               </figure>
           </div>*/}
-            <div class="card-content">
-              <div class="media">
-                <div class="media-left">
-                  <figure class="image is-48x48">
+            <div className="card-content">
+              <div className="media">
+                <div className="media-left">
+                  <figure className="image is-48x48">
                     <img
                       src="https://bulma.io/images/placeholders/96x96.png"
                       alt="Placeholder image"
                     />
                   </figure>
                 </div>
-                <div class="media-content">
-                  <p class="title is-4">Pinellas County Solid Waste</p>
-                  <p class="subtitle is-6">
+                <div className="media-content">
+                  <p className="title is-4">Pinellas County Solid Waste</p>
+                  <p className="subtitle is-6">
                     {/*<PhoneNumber number="(727)-464-7500" />*/}
                     <a
                       onClick={this._hideMenu}
@@ -80,7 +95,7 @@ class HomePage extends Component {
                 </div>
               </div>
 
-              <div class="content">
+              <div className="content">
                 <ul>
                   <li>Address:</li>
                   <li>Hours:</li>
