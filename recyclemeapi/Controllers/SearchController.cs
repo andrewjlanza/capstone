@@ -26,7 +26,10 @@ namespace recyclemeapi.Controllers
         w.Zip.Contains(searchTerm) || w.CenterName.ToLower().Contains(searchTerm.ToLower()) ||
         w.Address.ToLower().Contains(searchTerm.ToLower()) /*||
         
-        w.RecycleMeApi.Recycles.Contains(searchTerm.ToLower())*/
+        w.RecycleMeApi.Recycles.Contains(searchTerm.ToLower())
+        how to make searching for recycleables/ combinations of recyclables possible
+        including a dropdown filter next to search for recycleable type*/
+
       );
 
       return Ok(results);

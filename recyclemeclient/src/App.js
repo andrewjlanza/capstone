@@ -9,10 +9,38 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Switch>
-          <Route path="/" exact component={HomePage} />
-          <Route path="/location/:id" exact component={Location} />
-        </Switch>
+        <div>
+          <nav
+            className="navbar is-success"
+            role="navigation"
+            aria-label="main navigation"
+          >
+            <div className="navbar-brand">
+              <a className="navbar-item" href="/">
+                RecycleMe ♻️️
+              </a>
+            </div>
+
+            {/*<div id="navbarBasicExample" className="navbar-menu" />
+          
+            <div className="navbar-end">
+              <div className="navbar-item">
+                <div className="buttons">
+                  <a className="button is-primary">
+                    <strong>Sign up</strong>
+                  </a>
+                  <a className="button is-light">Log in</a>
+                </div>
+              </div>
+            </div>
+            */}
+          </nav>
+          <Switch>
+            <Route path="/" exact component={HomePage} />
+            <Route path="/location/:id" exact component={Location} />
+            <Route path="/search/:searchterm" exact component={HomePage} />
+          </Switch>
+        </div>
       </Router>
     );
   }

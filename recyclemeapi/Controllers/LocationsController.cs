@@ -14,7 +14,7 @@ namespace recyclemeapi.Controllers
     public ActionResult GetAction()
     {
       var db = new RecycleMeApiContext();
-      return Ok(db.Locations.OrderBy(o => o.Latitude));
+      return Ok(db.Locations);
     }
   }
 }

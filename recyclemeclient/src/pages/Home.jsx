@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+
 class HomePage extends Component {
   state = {
-    Location: []
+    locations: [] //vs. Location?? "locations" makes it show up on console
   };
 
   componentDidMount() {
@@ -11,40 +13,29 @@ class HomePage extends Component {
         json
       });
       this.setState({
-        Location: json.data
+        locations: json.data //vs. "locations"? no noticeable changes when adjusted??
       });
     });
   }
+  //componentDidMount() {
+  //  let _url = "https://localhost:5001/api";
+  //  console.log(this.props);
+  //  if (this.props.match.params.searchTerm) {
+  //    _url += `/search?searchTerm=${this.props.match.params.searchTerm}`;
+  //  } else {
+  //    _url += `/locations`;
+  //  }
+  //  axios.get(_url).then(json => {
+  //    console.log({ json });
+  //    this.setState({
+  //      locations: json.data
+  //    });
+  //  });
+  //}
 
   render() {
     return (
       <div>
-        <nav
-          className="navbar is-success"
-          role="navigation"
-          aria-label="main navigation"
-        >
-          <div className="navbar-brand">
-            <a className="navbar-item" href="/">
-              RecycleMe ♻️️
-            </a>
-          </div>
-
-          {/*<div id="navbarBasicExample" className="navbar-menu" />
-          
-            <div className="navbar-end">
-              <div className="navbar-item">
-                <div className="buttons">
-                  <a className="button is-primary">
-                    <strong>Sign up</strong>
-                  </a>
-                  <a className="button is-light">Log in</a>
-                </div>
-              </div>
-            </div>
-            */}
-        </nav>
-
         <form>
           <div className="field has-addons">
             <div className="control">
@@ -61,7 +52,7 @@ class HomePage extends Component {
           </div>
         </form>
         <section className="recycle-me-list">
-          <div class="card">
+          <div className="card">
             {/*<div class="card-image">
               <figure class="image is-4by3">
                 <img
@@ -70,41 +61,46 @@ class HomePage extends Component {
                 />
               </figure>
           </div>*/}
-            <div className="card-content">
-              <div className="media">
-                <div className="media-left">
-                  <figure className="image is-48x48">
-                    <img
-                      src="https://bulma.io/images/placeholders/96x96.png"
-                      alt="Placeholder image"
-                    />
-                  </figure>
-                </div>
-                <div className="media-content">
-                  <p className="title is-4">Pinellas County Solid Waste</p>
-                  <p className="subtitle is-6">
-                    {/*<PhoneNumber number="(727)-464-7500" />*/}
-                    <a
-                      onClick={this._hideMenu}
-                      className="linkContact"
-                      href="tel://17276199736"
-                    >
-                      <li className="menu-contact">+1 (727) 619-9736</li>
-                    </a>
-                  </p>
-                </div>
-              </div>
+            {this.state.locations.map(center => {
+              return (
+                <div className="card-content" key={center.id}>
+                  <div className="media">
+                    <div className="media-left">
+                      <figure className="image is-48x48">
+                        <img
+                          src="https://bulma.io/images/placeholders/96x96.png"
+                          alt="Placeholder image"
+                        />
+                      </figure>
+                    </div>
+                    <div className="media-content">
+                      <p className="title is-4">{center.centerName}</p>
+                      <p className="subtitle is-6">
+                        {/*<PhoneNumber number="(727)-464-7500" />*/}
+                        <a
+                          onClick={this._hideMenu}
+                          className="linkContact"
+                          href="tel://17276199736"
+                        >
+                          <li className="menu-contact">+1 (727) 619-9736</li>
+                        </a>
+                      </p>
+                    </div>
+                  </div>
 
-              <div className="content">
-                <ul>
-                  <li>Address:</li>
-                  <li>Hours:</li>
-                  <li>Recycles:</li>
-                </ul>
-                <br />
-                <a href="/details">More details</a>
-              </div>
-            </div>
+                  <div className="content">
+                    <ul>
+                      <li>Address:</li>
+                      <li>Hours:</li>
+                      <li>Recycles:</li>
+                    </ul>
+                    <br />
+                    {/* <a href="/details">More details</a> */}
+                    <Link to={`/location/${center.id}`}>More Details</Link>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </section>
       </div>
