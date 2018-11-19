@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace recyclemeapi.Controllers
+namespace RecycleMeApi.Controllers
 
 {
   [Route("api/[controller]")]

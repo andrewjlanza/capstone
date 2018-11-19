@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
-namespace recyclemeapi.Controllers
+namespace RecycleMeApi.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
@@ -15,6 +16,15 @@ namespace recyclemeapi.Controllers
     {
       var db = new RecycleMeApiContext();
       return Ok(db.Locations);
+    }
+
+    [HttpGet("{id}")]
+    public ActionResult GetALocation([FromRoute] int id)
+    {
+      var db = new RecycleMeApiContext();
+      return Ok(db.Locations
+      .Include(i => i.CenterName)
+      .SingleOrDefault(s => s.Id == id));
     }
   }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using recyclemeapi.Models;
 
-namespace recyclemeapi
+namespace RecycleMeApi
 {
   public partial class RecycleMeApiContext : DbContext
   {

@@ -38,7 +38,7 @@ class App extends Component {
           <Switch>
             <Route path="/" exact component={HomePage} />
             <Route path="/location/:id" exact component={Location} />
-            <Route path="/search/:searchterm" exact component={HomePage} />
+            <Route path="/search/:searchTerm" exact component={HomePage} />
           </Switch>
         </div>
       </Router>

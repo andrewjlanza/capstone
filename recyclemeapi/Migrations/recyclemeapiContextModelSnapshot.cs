@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using recyclemeapi;
+using RecycleMeApi;
 
-namespace recyclemeapi.Migrations
+namespace RecycleMeApi.Migrations
 {
   [DbContext(typeof(RecycleMeApiContext))]
-  partial class recyclemeapiContextModelSnapshot : ModelSnapshot
+  partial class RecycleMeApiContextModelSnapshot : ModelSnapshot
   {
     protected override void BuildModel(ModelBuilder modelBuilder)
     {
