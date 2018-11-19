@@ -23,7 +23,6 @@ namespace RecycleMeApi.Controllers
     {
       var db = new RecycleMeApiContext();
       return Ok(db.Locations
-      .Include(i => i.CenterName)
       .SingleOrDefault(s => s.Id == id));
     }
   }

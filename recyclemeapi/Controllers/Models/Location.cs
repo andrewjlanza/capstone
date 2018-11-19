@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
 
 namespace recyclemeapi.Models
 {
@@ -17,6 +20,7 @@ namespace recyclemeapi.Models
 
     public string PhoneNumber { get; set; }
 
+    [JsonConverter(typeof(StringEnumConverter))]
     public Recycles Recycles { get; set; }
     //"PriceRange" is "Recycles"
 
@@ -27,6 +31,12 @@ namespace recyclemeapi.Models
     public double Longitude { get; set; }
 
     public Recycles ItemsAccepted { get; set; }
+
+    public string weekdayHours { get; set; }
+
+    public string weekendHours { get; set; }
+
+    //hours
 
     //"franchise"
 

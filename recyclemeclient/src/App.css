@@ -68,3 +68,28 @@ li.menu-contact {
 div.content li {
   list-style: none;
 }
+
+.top-section {
+  display: flex;
+  justify-content: center;
+}
+.middle-section {
+  display: flex;
+  justify-content: center;
+}
+
+.bottom-section {
+  display: flex;
+  justify-content: center;
+}
+
+.addresses {
+  margin-left: 2em;
+}
+div.card-content {
+  border: 1px solid green;
+  border-radius: 3%;
+  margin: 1em;
+}
+div.card {
+}

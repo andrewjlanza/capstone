@@ -17,7 +17,7 @@ class App extends Component {
           >
             <div className="navbar-brand">
               <a className="navbar-item" href="/">
-                RecycleMe ♻️️
+                RecycleMePinellas ♻️️
               </a>
             </div>
 

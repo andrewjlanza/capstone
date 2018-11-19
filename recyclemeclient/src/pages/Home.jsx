@@ -82,7 +82,9 @@ class HomePage extends Component {
                           className="linkContact"
                           href="tel://17276199736"
                         >
-                          <li className="menu-contact">+1 (727) 619-9736</li>
+                          <li className="menu-contact">
+                            +1 {center.phoneNumber}
+                          </li>
                         </a>
                       </p>
                     </div>
@@ -90,9 +92,28 @@ class HomePage extends Component {
 
                   <div className="content">
                     <ul>
-                      <li>Address:</li>
-                      <li>Hours:</li>
-                      <li>Recycles:</li>
+                      <li className="addresses">
+                        <a
+                          onClick={this._hideMenu}
+                          className="linkContact"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href={`https://www.google.com/maps/search/?api=1&query=${
+                            center.address
+                          }+${center.city}+${center.state}+${center.zip}`}
+                        >
+                          <li>{center.address}</li>
+
+                          <li>
+                            {center.city}, {center.state} {center.zip}
+                          </li>
+                        </a>
+                      </li>
+                      {/* hyperlinking this address out to Google Maps */}
+                      {/* ..adding city to search?? */}
+                      <li>{center.weekdayHours}</li>
+                      <li>{center.weekendHours}</li>
+                      <li>{center.recycles}</li>
                     </ul>
                     <br />
                     {/* <a href="/details">More details</a> */}

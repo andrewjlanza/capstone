@@ -23,14 +23,43 @@ class Location extends Component {
     return (
       <div>
         <section className="top-section">
-          <img src="" />
+          <img src="" /> map is going to go here
           <section className="information">
             <h1>{this.state.location.centerName}</h1>
-            <h3>{this.props.match.params.centerName}</h3>
-            <h3>{this.props.match.params.address}</h3>
-            <h3>recycles xyz</h3>
+            <a
+              onClick={this._hideMenu}
+              className="linkContact"
+              target="_blank"
+              rel="noopener noreferrer"
+              href={`https://www.google.com/maps/search/?api=1&query=${
+                this.state.location.address
+              }+${this.state.location.city}+${this.state.location.state}+${
+                this.state.location.zip
+              }`}
+            >
+              <h3>{this.state.location.address}</h3>
+
+              <h3>
+                {this.state.location.city}, {this.state.location.state}{" "}
+                {this.state.location.zip}
+              </h3>
+              <h3 />
+            </a>
+
+            {/* how do i get that item type to display instead of a number... 
+            also, how do I handle the combinations conundrum?  */}
+            <a
+              onClick={this._hideMenu}
+              className="linkContact"
+              href="tel://{this.state.location.phoneNumber}"
+            >
+              <li className="menu-contact">
+                +1
+                {this.state.location.phoneNumber}
+              </li>
+            </a>
+            <h3>{this.state.location.itemsAccepted}</h3>
           </section>
-          this will display a picture..? and details of the location + address.
         </section>
         <section className="middle-section"> rating/ add a rating </section>
         <section className="bottom-section">
