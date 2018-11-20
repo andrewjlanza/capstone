@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+
 /* import config from "../Config"; */
 
 class Location extends Component {
@@ -54,11 +55,10 @@ class Location extends Component {
               href="tel://{this.state.location.phoneNumber}"
             >
               <li className="menu-contact">
-                +1
                 {this.state.location.phoneNumber}
               </li>
+              <li> {this.state.location.itemsAccepted}</li>
             </a>
-            <h3>{this.state.location.itemsAccepted}</h3>
           </section>
         </section>
         <section className="middle-section"> rating/ add a rating </section>

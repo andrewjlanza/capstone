@@ -20,9 +20,7 @@ namespace recyclemeapi.Models
 
     public string PhoneNumber { get; set; }
 
-    [JsonConverter(typeof(StringEnumConverter))]
-    public Recycles Recycles { get; set; }
-    //"PriceRange" is "Recycles"
+
 
     public int Rating { get; set; }
 
@@ -30,11 +28,13 @@ namespace recyclemeapi.Models
     public double Latitude { get; set; }
     public double Longitude { get; set; }
 
-    public Recycles ItemsAccepted { get; set; }
+
 
     public string weekdayHours { get; set; }
 
     public string weekendHours { get; set; }
+
+    public List<LocationMaterials> LocationMaterials { get; set; } = new List<LocationMaterials>();
 
     //hours
 
@@ -42,3 +42,9 @@ namespace recyclemeapi.Models
 
   }
 }
+
+// TODO
+// get it building,  v
+// add at least 1 materail per location v
+// migrate & update your db v 
+// displaying materials on index page. 

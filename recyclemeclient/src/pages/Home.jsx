@@ -4,10 +4,21 @@ import { Link } from "react-router-dom";
 
 class HomePage extends Component {
   state = {
-    locations: [] //vs. Location?? "locations" makes it show up on console
-  };
+    locations: [], //vs. Location?? "locations" makes it show up on console
+    searchTerm: "",
+    plastics: true,
+    paper: true,
+    glass: true,
+    cardboard: true,
+    metal: true,
+    electronics: true,
+    aluminum_cans: true,
+    chemicals: true,
+    yard_waste: true
+  }; /* TRYING TO DECIDE WHICH TO USE^v, BOTH WORK BUT
+         BOTTOM ONE MIGHT HELP WITH FUNCTIONALITY OF SEARCH? */
 
-  componentDidMount() {
+  /* componentDidMount() {
     axios.get("https://localhost:5001/api/locations").then(json => {
       console.log({
         json
@@ -16,39 +27,158 @@ class HomePage extends Component {
         locations: json.data //vs. "locations"? no noticeable changes when adjusted??
       });
     });
+  } */ componentDidMount() {
+    let _url = "https://localhost:5001/api";
+    console.log(this.props);
+    if (this.props.match.params.searchTerm) {
+      _url += `/search`;
+    } else {
+      _url += `/locations`;
+    }
+    axios
+      .get(_url, {
+        searchTerm: this.props.match.params.searchTerm,
+        plastics: this.state.plastics,
+        paper: this.state.paper,
+        metal: this.state.metal,
+        electronics: this.state.electronics,
+        glass: this.state.glass,
+        chemicals: this.state.chemicals,
+        yard_waste: this.state.yard_waste,
+        cardboard: this.state.cardboard,
+        aluminum_cans: this.state.aluminum_cans
+      })
+      .then(json => {
+        console.log({ json });
+        this.setState({
+          locations: json.data
+        });
+      });
   }
-  //componentDidMount() {
-  //  let _url = "https://localhost:5001/api";
-  //  console.log(this.props);
-  //  if (this.props.match.params.searchTerm) {
-  //    _url += `/search?searchTerm=${this.props.match.params.searchTerm}`;
-  //  } else {
-  //    _url += `/locations`;
-  //  }
-  //  axios.get(_url).then(json => {
-  //    console.log({ json });
-  //    this.setState({
-  //      locations: json.data
-  //    });
-  //  });
-  //}
+
+  handleMaterialChoice = e => {
+    this.setState({ [e.target.value.toLowerCase()]: e.target.checked });
+  };
+
+  handleSearchTermUpdate = e => {
+    this.setState({
+      searchTerm: e.target.value
+    });
+  };
+
+  search = e => {
+    e.preventDefault();
+    fetch(
+      `http://localhost:5000/api/search?searchTerm=${this.state.searchTerm}`
+    )
+      .then(resp => resp.json())
+      .then(json => {
+        console.log({ json });
+        this.setState({
+          locations: json
+        });
+      });
+  };
 
   render() {
     return (
       <div>
-        <form>
+        <form onSubmit={this.search}>
           <div className="field has-addons">
             <div className="control">
               <input
+                type="search"
+                onChange={this.handleSearchTermUpdate}
+                placeholder="Find a recycling center..."
+              />
+
+              {/*  <input
                 className="input"
                 type="text"
                 placeholder="Find a Recycling Center"
-              />
+              /> */}
             </div>
-            <div className="control" />
-          </div>
+            {/*  <div className="control" /> */}
+          </div>{" "}
+          <text>I'm looking to recycle:</text>
+          <br />
+          <label class="checkbox">
+            <input
+              type="checkbox"
+              value="plastics"
+              checked={this.state.plastics}
+              onChange={this.handleMaterialChoice}
+            />{" "}
+            Plastics
+            <br />
+            <input
+              type="checkbox"
+              value="paper"
+              checked={this.state.paper}
+              onChange={this.handleMaterialChoice}
+            />{" "}
+            Paper
+            <br />
+            <input
+              type="checkbox"
+              value="glass"
+              checked={this.state.glass}
+              onChange={this.handleMaterialChoice}
+            />{" "}
+            Glass
+            <br />
+            <input
+              type="checkbox"
+              value="cardboard"
+              checked={this.state.cardboard}
+              onChange={this.handleMaterialChoice}
+            />{" "}
+            Cardboard
+            <br />
+            <input
+              type="checkbox"
+              value="aluminum_cans"
+              checked={this.state.aluminum_cans}
+              onChange={this.handleMaterialChoice}
+            />{" "}
+            Aluminum Cans
+            <br />
+            <input
+              type="checkbox"
+              value="electronics"
+              checked={this.state.electronics}
+              onChange={this.handleMaterialChoice}
+            />{" "}
+            Electronics
+            <br />
+            <input
+              type="checkbox"
+              value="metal"
+              checked={this.state.metal}
+              onChange={this.handleMaterialChoice}
+            />{" "}
+            Metal
+            <br />
+            <input
+              type="checkbox"
+              value="chemicals"
+              checked={this.state.chemicals}
+              onChange={this.handleMaterialChoice}
+            />{" "}
+            Chemicals
+            <br />
+            <input
+              type="checkbox"
+              value="yard_waste"
+              checked={this.state.yard_waste}
+              onChange={this.handleMaterialChoice}
+            />{" "}
+            Yard Waste
+          </label>
           <div>
-            <a className="button is-info">Get Recycling!</a>
+            <button className="search-button button is-info">
+              Get Recycling!
+            </button>
           </div>
         </form>
         <section className="recycle-me-list">
@@ -82,9 +212,7 @@ class HomePage extends Component {
                           className="linkContact"
                           href="tel://17276199736"
                         >
-                          <li className="menu-contact">
-                            +1 {center.phoneNumber}
-                          </li>
+                          <li className="menu-contact">{center.phoneNumber}</li>
                         </a>
                       </p>
                     </div>
@@ -113,7 +241,11 @@ class HomePage extends Component {
                       {/* ..adding city to search?? */}
                       <li>{center.weekdayHours}</li>
                       <li>{center.weekendHours}</li>
-                      <li>{center.recycles}</li>
+                      <li>
+                        {center.locationMaterials.map(material => {
+                          return <div>{material.material.materialType}</div>;
+                        })}
+                      </li>
                     </ul>
                     <br />
                     {/* <a href="/details">More details</a> */}

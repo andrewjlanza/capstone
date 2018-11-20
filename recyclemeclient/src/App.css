@@ -50,9 +50,10 @@ div.field.has-addons {
   display: flex;
   justify-content: center;
 }
-div a.button.is-info {
+.search-button .button.is-info {
   display: flex;
   justify-content: center;
+  align-content: center;
   margin-left: 30px;
   margin-right: 30px;
 }

@@ -15,7 +15,7 @@ namespace RecycleMeApi.Controllers
     public ActionResult GetAction()
     {
       var db = new RecycleMeApiContext();
-      return Ok(db.Locations);
+      return Ok(db.Locations.Include(i => i.LocationMaterials).ThenInclude(t => t.Material));
     }
 
     [HttpGet("{id}")]
@@ -23,7 +23,28 @@ namespace RecycleMeApi.Controllers
     {
       var db = new RecycleMeApiContext();
       return Ok(db.Locations
-      .SingleOrDefault(s => s.Id == id));
+      /* .Include(i => i.Materials)
+      .Include(i => i.LocationMaterials)
+ */      .SingleOrDefault(s => s.Id == id));
     }
   }
-}
+}/* [HttpGet("{id}/reviews/{userId}")]
+        public ActionResult GetUserReview([FromRoute] int id, [FromRoute] string userId)
+        {
+            // query the review table to get the firstordefault (f => f.locationId && f.userId )
+            var db = new CoffeeShopFinderContext();
+            var review = db.Reviews.FirstOrDefault(f => f.LocationId == id && f.UserId == userId);
+            // if (found)
+            if (review != null)
+            {
+                return Ok(new { wasFound = true, review });
+            }
+            else
+            {
+                return Ok(new { wasFound = false });
+            }
+            // return that 
+            // else return a not found message
+
+        } */
+

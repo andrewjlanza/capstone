@@ -21,7 +21,7 @@ namespace RecycleMeApi.Controllers
       var db = new RecycleMeApiContext();
 
       //connect to database v
-      var results = db.Locations.Where(w =>
+      var results = db.Locations.Include(i => i.LocationMaterials).ThenInclude(t => t.Material).Where(w =>
         w.City.ToLower().Contains(searchTerm.ToLower()) ||
         w.Zip.Contains(searchTerm) || w.CenterName.ToLower().Contains(searchTerm.ToLower()) ||
         w.Address.ToLower().Contains(searchTerm.ToLower()) /*||
