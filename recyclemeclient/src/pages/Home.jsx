@@ -18,16 +18,18 @@ class HomePage extends Component {
   }; /* TRYING TO DECIDE WHICH TO USE^v, BOTH WORK BUT
          BOTTOM ONE MIGHT HELP WITH FUNCTIONALITY OF SEARCH? */
 
-  /* componentDidMount() {
-    axios.get("https://localhost:5001/api/locations").then(json => {
-      console.log({
-        json
-      });
-      this.setState({
-        locations: json.data //vs. "locations"? no noticeable changes when adjusted??
-      });
-    });
-  } */ componentDidMount() {
+  //  componentDidMount() {
+  //   axios.get("https://localhost:5001/api/locations").then(json => {
+  //     console.log({
+  //       json
+  //     });
+  //     this.setState({
+  //       locations: json.data //vs. "locations"? no noticeable changes when adjusted??
+  //     });
+  //   });
+  // }
+
+  componentDidMount() {
     let _url = "https://localhost:5001/api";
     console.log(this.props);
     if (this.props.match.params.searchTerm) {
@@ -35,6 +37,8 @@ class HomePage extends Component {
     } else {
       _url += `/locations`;
     }
+    console.log("GETTING");
+
     axios
       .get(_url, {
         searchTerm: this.props.match.params.searchTerm,
@@ -58,6 +62,9 @@ class HomePage extends Component {
 
   handleMaterialChoice = e => {
     this.setState({ [e.target.value.toLowerCase()]: e.target.checked });
+    console.log(
+      `Setting ${e.target.value.toLowerCase()} to ${e.target.checked}`
+    );
   };
 
   handleSearchTermUpdate = e => {
@@ -68,14 +75,25 @@ class HomePage extends Component {
 
   search = e => {
     e.preventDefault();
-    fetch(
-      `http://localhost:5000/api/search?searchTerm=${this.state.searchTerm}`
-    )
-      .then(resp => resp.json())
-      .then(json => {
-        console.log({ json });
+    axios
+      .get(`http://localhost:5000/api/search`, {
+        params: {
+          searchTerm: this.state.searchTerm,
+          plastics: this.state.plastics,
+          paper: this.state.paper,
+          metal: this.state.metal,
+          electronics: this.state.electronics,
+          glass: this.state.glass,
+          chemicals: this.state.chemicals,
+          yard_waste: this.state.yard_waste,
+          cardboard: this.state.cardboard,
+          aluminum_cans: this.state.aluminum_cans
+        }
+      })
+      .then(response => {
+        console.log(response.data);
         this.setState({
-          locations: json
+          locations: response.data
         });
       });
   };
@@ -87,6 +105,7 @@ class HomePage extends Component {
           <div className="field has-addons">
             <div className="control">
               <input
+                className="searchBar"
                 type="search"
                 onChange={this.handleSearchTermUpdate}
                 placeholder="Find a recycling center..."
@@ -176,9 +195,9 @@ class HomePage extends Component {
             Yard Waste
           </label>
           <div>
-            <button className="search-button button is-info">
+            {/* <button className="search-button button is-info">
               Get Recycling!
-            </button>
+            </button> */}
           </div>
         </form>
         <section className="recycle-me-list">

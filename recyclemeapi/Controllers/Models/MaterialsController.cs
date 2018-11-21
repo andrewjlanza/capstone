@@ -1,4 +1,4 @@
-using System;
+/* using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,7 +15,7 @@ namespace RecycleMeApi.Controllers
     public ActionResult GetCenter()
     {
       var db = new RecycleMeApiContext();
-      return Ok(db.Locations.Include(i => i.LocationMaterials).ThenInclude(t => t.Material).);
+      return Ok(db.Locations.Include(i => i.LocationMaterials).ThenInclude(t => t.Material).Where());
     }
   }
-}
+} */
