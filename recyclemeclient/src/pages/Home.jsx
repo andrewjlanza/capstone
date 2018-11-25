@@ -125,7 +125,7 @@ class HomePage extends Component {
             <input
               type="checkbox"
               value="plastics"
-              checked={this.state.plastics}
+              /* checked={this.state.plastics} */
               onChange={this.handleMaterialChoice}
             />{" "}
             Plastics
@@ -133,7 +133,7 @@ class HomePage extends Component {
             <input
               type="checkbox"
               value="paper"
-              checked={this.state.paper}
+              /* checked={this.state.paper} */
               onChange={this.handleMaterialChoice}
             />{" "}
             Paper
@@ -141,7 +141,7 @@ class HomePage extends Component {
             <input
               type="checkbox"
               value="glass"
-              checked={this.state.glass}
+              /* checked={this.state.glass} */
               onChange={this.handleMaterialChoice}
             />{" "}
             Glass
@@ -149,7 +149,7 @@ class HomePage extends Component {
             <input
               type="checkbox"
               value="cardboard"
-              checked={this.state.cardboard}
+              /* checked={this.state.cardboard} */
               onChange={this.handleMaterialChoice}
             />{" "}
             Cardboard
@@ -157,7 +157,7 @@ class HomePage extends Component {
             <input
               type="checkbox"
               value="aluminum_cans"
-              checked={this.state.aluminum_cans}
+              /* checked={this.state.aluminum_cans} */
               onChange={this.handleMaterialChoice}
             />{" "}
             Aluminum Cans
@@ -165,7 +165,7 @@ class HomePage extends Component {
             <input
               type="checkbox"
               value="electronics"
-              checked={this.state.electronics}
+              /* checked={this.state.electronics} */
               onChange={this.handleMaterialChoice}
             />{" "}
             Electronics
@@ -173,7 +173,7 @@ class HomePage extends Component {
             <input
               type="checkbox"
               value="metal"
-              checked={this.state.metal}
+              /* checked={this.state.metal} */
               onChange={this.handleMaterialChoice}
             />{" "}
             Metal
@@ -181,7 +181,7 @@ class HomePage extends Component {
             <input
               type="checkbox"
               value="chemicals"
-              checked={this.state.chemicals}
+              /*  checked={this.state.chemicals} */
               onChange={this.handleMaterialChoice}
             />{" "}
             Chemicals
@@ -189,7 +189,7 @@ class HomePage extends Component {
             <input
               type="checkbox"
               value="yard_waste"
-              checked={this.state.yard_waste}
+              /* checked={this.state.yard_waste} */
               onChange={this.handleMaterialChoice}
             />{" "}
             Yard Waste
@@ -261,6 +261,8 @@ class HomePage extends Component {
                       <li>{center.weekdayHours}</li>
                       <li>{center.weekendHours}</li>
                       <li>
+                        {""}
+                        <strong>This center recycles:</strong>
                         {center.locationMaterials.map(material => {
                           return <div>{material.material.materialType}</div>;
                         })}
