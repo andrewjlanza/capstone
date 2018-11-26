@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import HomePage from "./pages/Home";
@@ -17,7 +16,10 @@ class App extends Component {
           >
             <div className="navbar-brand">
               <a className="navbar-item" href="/">
-                RecycleMePinellas ♻️️
+                RecycleMePinellas{" "}
+                <span role="img" aria-label="recycle">
+                  ♻️️
+                </span>
               </a>
             </div>
 

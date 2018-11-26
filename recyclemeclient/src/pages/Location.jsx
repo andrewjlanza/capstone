@@ -24,7 +24,7 @@ class Location extends Component {
     return (
       <div>
         <section className="top-section">
-          <img src="" /> map is going to go here
+          <img src="" alt="map thing or something" /> map is going to go here
           <section className="information">
             <h1>{this.state.location.centerName}</h1>
             <a
@@ -44,7 +44,6 @@ class Location extends Component {
                 {this.state.location.city}, {this.state.location.state}{" "}
                 {this.state.location.zip}
               </h3>
-              <h3 />
             </a>
 
             {/* how do i get that item type to display instead of a number... 

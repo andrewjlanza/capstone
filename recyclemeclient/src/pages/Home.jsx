@@ -119,9 +119,9 @@ class HomePage extends Component {
             </div>
             {/*  <div className="control" /> */}
           </div>{" "}
-          <text>I'm looking to recycle:</text>
+          <div>I'm looking to recycle:</div>
           <br />
-          <label class="checkbox">
+          <label className="checkbox">
             <input
               type="checkbox"
               value="plastics"
@@ -202,8 +202,8 @@ class HomePage extends Component {
         </form>
         <section className="recycle-me-list">
           <div className="card">
-            {/*<div class="card-image">
-              <figure class="image is-4by3">
+            {/*<div className="card-image">
+              <figure className="image is-4by3">
                 <img
                   src="https://bulma.io/images/placeholders/1280x960.png"
                   alt="Placeholder image"
@@ -218,7 +218,7 @@ class HomePage extends Component {
                       <figure className="image is-48x48">
                         <img
                           src="https://bulma.io/images/placeholders/96x96.png"
-                          alt="Placeholder image"
+                          alt="Placeholder"
                         />
                       </figure>
                     </div>
@@ -249,11 +249,11 @@ class HomePage extends Component {
                             center.address
                           }+${center.city}+${center.state}+${center.zip}`}
                         >
-                          <li>{center.address}</li>
+                          <p>{center.address}</p>
 
-                          <li>
+                          <p>
                             {center.city}, {center.state} {center.zip}
-                          </li>
+                          </p>
                         </a>
                       </li>
                       {/* hyperlinking this address out to Google Maps */}
@@ -264,7 +264,11 @@ class HomePage extends Component {
                         {""}
                         <strong>This center recycles:</strong>
                         {center.locationMaterials.map(material => {
-                          return <div>{material.material.materialType}</div>;
+                          return (
+                            <div key={material.id}>
+                              {material.material.materialType}
+                            </div>
+                          );
                         })}
                       </li>
                     </ul>
