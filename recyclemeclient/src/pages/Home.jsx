@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+/* import geolocation from "react-geolocation"; */
+import { geolocated } from "react-geolocated";
 
 class HomePage extends Component {
   state = {
@@ -15,23 +17,11 @@ class HomePage extends Component {
     aluminum_cans: false,
     chemicals: false,
     yard_waste: false
-  }; /* TRYING TO DECIDE WHICH TO USE^v, BOTH WORK BUT
-         BOTTOM ONE MIGHT HELP WITH FUNCTIONALITY OF SEARCH? */
-
-  //  componentDidMount() {
-  //   axios.get("https://localhost:5001/api/locations").then(json => {
-  //     console.log({
-  //       json
-  //     });
-  //     this.setState({
-  //       locations: json.data //vs. "locations"? no noticeable changes when adjusted??
-  //     });
-  //   });
-  // }
+  };
 
   componentDidMount() {
     let _url = "https://localhost:5001/api";
-    console.log(this.props);
+    console.log({ props: this.props });
     if (this.props.match.params.searchTerm) {
       _url += `/search`;
     } else {
@@ -98,9 +88,28 @@ class HomePage extends Component {
       });
   };
 
+  getNearby = () => {
+    console.log("getting nearby");
+    axios
+      .get(`http://localhost:5000/api/search/nearby`, {
+        params: {
+          lat: this.props.coords.latitude,
+          lng: this.props.coords.longitude
+        }
+      })
+      .then(response => {
+        console.log(response.data);
+        this.setState({
+          locations: response.data
+        });
+      });
+  };
+
   render() {
     return (
       <div>
+        {this.props.coords ? this.props.coords.latitude : " not yet"}
+        {this.props.coords ? this.props.coords.longitude : " not yet"}
         <form onSubmit={this.search}>
           <div className="field has-addons">
             <div className="control">
@@ -109,107 +118,113 @@ class HomePage extends Component {
                 type="search"
                 onChange={this.handleSearchTermUpdate}
                 placeholder="Find a recycling center..."
-              />
-
-              {/*  <input
-                className="input"
-                type="text"
-                placeholder="Find a Recycling Center"
-              /> */}
+              />{" "}
             </div>
             {/*  <div className="control" /> */}
           </div>{" "}
-          <div>I'm looking to recycle:</div>
+          <div className="looking-to-recycle">I'm looking to recycle:</div>
           <br />
-          <label className="checkbox">
-            <input
-              type="checkbox"
-              value="plastics"
-              /* checked={this.state.plastics} */
-              onChange={this.handleMaterialChoice}
-            />{" "}
-            Plastics
-            <br />
-            <input
-              type="checkbox"
-              value="paper"
-              /* checked={this.state.paper} */
-              onChange={this.handleMaterialChoice}
-            />{" "}
-            Paper
-            <br />
-            <input
-              type="checkbox"
-              value="glass"
-              /* checked={this.state.glass} */
-              onChange={this.handleMaterialChoice}
-            />{" "}
-            Glass
-            <br />
-            <input
-              type="checkbox"
-              value="cardboard"
-              /* checked={this.state.cardboard} */
-              onChange={this.handleMaterialChoice}
-            />{" "}
-            Cardboard
-            <br />
-            <input
-              type="checkbox"
-              value="aluminum_cans"
-              /* checked={this.state.aluminum_cans} */
-              onChange={this.handleMaterialChoice}
-            />{" "}
-            Aluminum Cans
-            <br />
-            <input
-              type="checkbox"
-              value="electronics"
-              /* checked={this.state.electronics} */
-              onChange={this.handleMaterialChoice}
-            />{" "}
-            Electronics
-            <br />
-            <input
-              type="checkbox"
-              value="metal"
-              /* checked={this.state.metal} */
-              onChange={this.handleMaterialChoice}
-            />{" "}
-            Metal
-            <br />
-            <input
-              type="checkbox"
-              value="chemicals"
-              /*  checked={this.state.chemicals} */
-              onChange={this.handleMaterialChoice}
-            />{" "}
-            Chemicals
-            <br />
-            <input
-              type="checkbox"
-              value="yard_waste"
-              /* checked={this.state.yard_waste} */
-              onChange={this.handleMaterialChoice}
-            />{" "}
-            Yard Waste
-          </label>
-          <div>
-            {/* <button className="search-button button is-info">
+          <div className="checkbox-filter">
+            <div className="checkbox">
+              <input
+                type="checkbox"
+                value="plastics"
+                id="plasticsCheckbox"
+                /* checked={this.state.plastics} */
+                onChange={this.handleMaterialChoice}
+              />{" "}
+              <label htmlFor="plasticsCheckbox">Plastics</label>
+              <br />
+              <input
+                type="checkbox"
+                value="paper"
+                id="paperCheckbox"
+                /* checked={this.state.paper} */
+                onChange={this.handleMaterialChoice}
+              />{" "}
+              <label htmlFor="paperCheckbox">Paper</label>
+              <br />
+              <input
+                type="checkbox"
+                value="glass"
+                id="glassCheckbox"
+                /* checked={this.state.glass} */
+                onChange={this.handleMaterialChoice}
+              />{" "}
+              <label htmlFor="glassCheckbox"> Glass</label>
+              <br />
+              <input
+                type="checkbox"
+                value="cardboard"
+                id="cardboardCheckbox"
+                /* checked={this.state.cardboard} */
+                onChange={this.handleMaterialChoice}
+              />{" "}
+              <label htmlFor="cardboardCheckbox">Cardboard</label>
+              <br />
+              <input
+                type="checkbox"
+                value="aluminum_cans"
+                id="aluminumCansCheckbox"
+                /* checked={this.state.aluminum_cans} */
+                onChange={this.handleMaterialChoice}
+              />{" "}
+              <label htmlFor="aluminumCansCheckbox">Aluminum Cans</label>
+              <br />
+            </div>
+            <div className="checkbox">
+              <input
+                type="checkbox"
+                value="electronics"
+                id="electronicsCheckbox"
+                /* checked={this.state.electronics} */
+                onChange={this.handleMaterialChoice}
+              />{" "}
+              <label htmlFor="electronicsCheckbox">Electronics</label>
+              <br />
+              <input
+                type="checkbox"
+                value="metal"
+                id="metalCheckbox"
+                /* checked={this.state.metal} */
+                onChange={this.handleMaterialChoice}
+              />{" "}
+              <label htmlFor="metalCheckbox">Metal</label>
+              <br />
+              <input
+                type="checkbox"
+                value="chemicals"
+                id="chemicalsCheckbox"
+                /*  checked={this.state.chemicals} */
+                onChange={this.handleMaterialChoice}
+              />{" "}
+              <label htmlFor="chemicalsCheckbox">Chemicals</label>
+              <br />
+              <input
+                type="checkbox"
+                value="yard_waste"
+                id="yardWasteCheckbox"
+                /* checked={this.state.yard_waste} */
+                onChange={this.handleMaterialChoice}
+              />{" "}
+              <label htmlFor="yardWasteCheckbox">Yard Waste</label>
+            </div>
+          </div>
+          <div className="button-div">
+            <button className="search-button button is-info">
               Get Recycling!
-            </button> */}
+            </button>
+            <img
+              className="compass-img"
+              onClick={this.getNearby}
+              src="./compass.png"
+              alt=""
+            />
           </div>
         </form>
         <section className="recycle-me-list">
+          <header>found {this.state.locations.length} results</header>
           <div className="card">
-            {/*<div className="card-image">
-              <figure className="image is-4by3">
-                <img
-                  src="https://bulma.io/images/placeholders/1280x960.png"
-                  alt="Placeholder image"
-                />
-              </figure>
-          </div>*/}
             {this.state.locations.map(center => {
               return (
                 <div className="card-content" key={center.id}>
@@ -286,4 +301,9 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage;
+export default geolocated({
+  positionOptions: {
+    enableHighAccuracy: false
+  },
+  userDecisionTimeout: 5000
+})(HomePage);

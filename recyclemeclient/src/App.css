@@ -101,3 +101,38 @@ div.card {
   border: 1px solid black;
   border-radius: 5%;
 }
+
+li {
+  list-style: none;
+}
+.top-section img {
+  margin-left: 20px;
+}
+
+.checkbox {
+  margin-left: 5px;
+}
+.button.is-info {
+  margin-left: 5px;
+}
+.looking-to-recycle {
+  margin-left: 5px;
+}
+.compass-img:active {
+  box-shadow: 0 5px rgba(3, 0, 0, 0.014);
+  transform: translateY(4px);
+}
+.compass-img {
+  margin-left: 8px;
+}
+
+.checkbox-filter {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1em;
+}
+
+.button-div {
+  display: flex;
+  justify-content: center;
+}

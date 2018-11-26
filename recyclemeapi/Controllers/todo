@@ -1,0 +1,6 @@
+TODO today:
+- blank search bug
+- on change of filters, update results list
+1 Create a nearby button
+  - on click, do a GET request to the new endpoint with the user lat/lng
+  

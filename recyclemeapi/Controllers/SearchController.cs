@@ -1,9 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace RecycleMeApi.Controllers
 
@@ -98,6 +98,22 @@ namespace RecycleMeApi.Controllers
                   .Where(w => locationIds.Contains(w.Id));
 
       return Ok(locations);
+    }
+
+    [HttpGet("nearby")]
+    public ActionResult GetNearBy([FromQuery] double lat, [FromQuery] double lng)
+    {
+
+      var db = new RecycleMeApiContext();
+
+      var rv = (from location in db.Locations
+                let distance = Math.Sqrt(Math.Pow(location.Latitude - lat, 2) + Math.Pow(location.Longitude - lng, 2))        // where distance <= 10000
+
+                select new { location = location, Distance = distance }).OrderByDescending(o => o.Distance).Select(s => s.location).Include(i => i.LocationMaterials).ThenInclude(t => t.Material);//.Take(5).OrderBy(x => x.distance).ToList();
+
+
+
+      return Ok(rv);
     }
   }
 }

@@ -8,7 +8,7 @@ class Location extends Component {
     location: {}
   };
 
-  // axois your API to get the information for the selected center
+  // axios your API to get the information for the selected center
   componentDidMount() {
     axios
       .get(`https://localhost:5001/api/locations/${this.props.match.params.id}`)
@@ -24,7 +24,7 @@ class Location extends Component {
     return (
       <div>
         <section className="top-section">
-          <img src="" alt="map thing or something" /> map is going to go here
+          <img src="" alt="map thing or something" />
           <section className="information">
             <h1>{this.state.location.centerName}</h1>
             <a
@@ -60,7 +60,7 @@ class Location extends Component {
             </a>
           </section>
         </section>
-        <section className="middle-section"> rating/ add a rating </section>
+        {/* <section className="middle-section"> rating/ add a rating </section>
         <section className="bottom-section">
           <form>
             <header>reviews!</header>
@@ -72,7 +72,7 @@ class Location extends Component {
             <lil>wow, another one!</lil>
             <li>another review, holy smokes!</li>
           </ul>
-        </section>
+        </section> */}
       </div>
     );
   }
