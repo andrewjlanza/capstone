@@ -3,4 +3,17 @@ TODO today:
 - on change of filters, update results list
 1 Create a nearby button
   - on click, do a GET request to the new endpoint with the user lat/lng
+
+
+
+  make it display recycleable type dynamically on more details page
+  display map / display dynamically by address
+  on change of filters, update results list
+  OR
+  filters + nearby (I know this is a bitch)
+
+
+  make whole header bar clickable for home??
+  make info popup button?
+
   

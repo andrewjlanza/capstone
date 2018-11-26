@@ -104,12 +104,14 @@ class HomePage extends Component {
         });
       });
   };
+  popupFunction = () => {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+  };
 
   render() {
     return (
       <div>
-        {this.props.coords ? this.props.coords.latitude : " not yet"}
-        {this.props.coords ? this.props.coords.longitude : " not yet"}
         <form onSubmit={this.search}>
           <div className="field has-addons">
             <div className="control">
@@ -122,7 +124,9 @@ class HomePage extends Component {
             </div>
             {/*  <div className="control" /> */}
           </div>{" "}
-          <div className="looking-to-recycle">I'm looking to recycle:</div>
+          <div className="looking-to-recycle">
+            <strong>I'm looking to recycle:</strong>
+          </div>
           <br />
           <div className="checkbox-filter">
             <div className="checkbox">
@@ -211,6 +215,13 @@ class HomePage extends Component {
             </div>
           </div>
           <div className="button-div">
+            {/* <img
+              className="info-img"
+              id="myPopup"
+              onClick="popupFunction()"
+              src="./info.png"
+              alt=""
+            /> */}
             <button className="search-button button is-info">
               Get Recycling!
             </button>
@@ -223,7 +234,9 @@ class HomePage extends Component {
           </div>
         </form>
         <section className="recycle-me-list">
-          <header>found {this.state.locations.length} results</header>
+          <header className="results">
+            found <u>{this.state.locations.length}</u> recycling centers
+          </header>
           <div className="card">
             {this.state.locations.map(center => {
               return (
@@ -231,10 +244,7 @@ class HomePage extends Component {
                   <div className="media">
                     <div className="media-left">
                       <figure className="image is-48x48">
-                        <img
-                          src="https://bulma.io/images/placeholders/96x96.png"
-                          alt="Placeholder"
-                        />
+                        <img src="./pinellas.png" alt="Placeholder" />
                       </figure>
                     </div>
                     <div className="media-content">

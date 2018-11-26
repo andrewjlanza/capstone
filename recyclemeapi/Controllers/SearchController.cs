@@ -109,7 +109,7 @@ namespace RecycleMeApi.Controllers
       var rv = (from location in db.Locations
                 let distance = Math.Sqrt(Math.Pow(location.Latitude - lat, 2) + Math.Pow(location.Longitude - lng, 2))        // where distance <= 10000
 
-                select new { location = location, Distance = distance }).OrderByDescending(o => o.Distance).Select(s => s.location).Include(i => i.LocationMaterials).ThenInclude(t => t.Material);//.Take(5).OrderBy(x => x.distance).ToList();
+                select new { location = location, Distance = distance }).OrderByDescending(o => o.Distance).Select(s => s.location).Include(i => i.LocationMaterials).ThenInclude(t => t.Material).Take(5);//.Take(5).OrderBy(x => x.distance).ToList();
 
 
 

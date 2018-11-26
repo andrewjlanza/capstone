@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
-
+import { Link } from "react-router-dom";
+/* import App from "./App"; */
 /* import config from "../Config"; */
 
 class Location extends Component {
   state = {
-    location: {}
+    location: {
+      locationMaterials: []
+    }
   };
 
   // axios your API to get the information for the selected center
@@ -24,7 +27,7 @@ class Location extends Component {
     return (
       <div>
         <section className="top-section">
-          <img src="" alt="map thing or something" />
+          <img src="" alt="" />
           <section className="information">
             <h1>{this.state.location.centerName}</h1>
             <a
@@ -59,6 +62,19 @@ class Location extends Component {
               <li> {this.state.location.itemsAccepted}</li>
             </a>
           </section>
+          <li className="more-details">
+            <strong> Recycleables accepted:</strong>
+            {this.state.location.locationMaterials.map(material => {
+              return (
+                <div key={material.id}>{material.material.materialType}</div>
+              );
+            })}
+            <ul className="">
+              Hours of Operation:
+              <li>{this.state.location.weekdayHours}</li>
+              <li>{this.state.location.weekendHours}</li>
+            </ul>
+          </li>
         </section>
         {/* <section className="middle-section"> rating/ add a rating </section>
         <section className="bottom-section">

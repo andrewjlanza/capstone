@@ -13,6 +13,7 @@ class App extends Component {
             className="navbar is-success"
             role="navigation"
             aria-label="main navigation"
+            /* href="/" */
           >
             <div className="navbar-brand">
               <a className="navbar-item" href="/">
