@@ -6,15 +6,15 @@ class HomePage extends Component {
   state = {
     locations: [], //vs. Location?? "locations" makes it show up on console
     searchTerm: "",
-    plastics: true,
-    paper: true,
-    glass: true,
-    cardboard: true,
-    metal: true,
-    electronics: true,
-    aluminum_cans: true,
-    chemicals: true,
-    yard_waste: true
+    plastics: false,
+    paper: false,
+    glass: false,
+    cardboard: false,
+    metal: false,
+    electronics: false,
+    aluminum_cans: false,
+    chemicals: false,
+    yard_waste: false
   }; /* TRYING TO DECIDE WHICH TO USE^v, BOTH WORK BUT
          BOTTOM ONE MIGHT HELP WITH FUNCTIONALITY OF SEARCH? */
 

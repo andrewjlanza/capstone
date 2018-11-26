@@ -78,39 +78,24 @@ namespace RecycleMeApi.Controllers
       // query the locationsMaterials table to select locations that have that 
       // This is where the filtering happens
 
-      var locationsWithMaterials = db
-         .LocationMaterials
-         .Include(i => i.Location)
-         .Include(i => i.Material)
-         .Where(w =>
-            materialsIds.Contains(w.MaterialsId)
-            &&
-            (
-                w.Location.CenterName.ToLower().Contains(searchTerm) ||
-                w.Location.City.ToLower().Contains(searchTerm) ||
-                w.Location.Zip.Contains(searchTerm) ||
-                w.Location.Address.ToLower().Contains(searchTerm)
-            )
-         )
-         .Select(s => s.Id);
+      var filteredLocationsByName = db
+              .LocationMaterials
+              .Include(i => i.Location)
+              .Include(i => i.Material)
+              .Where(w => w.Location.CenterName.ToLower().Contains(searchTerm));
 
-      // get the results needed formated in a way the UI wants it
+      if (materialsIds.Any())
+      {
+        filteredLocationsByName = filteredLocationsByName
+            .Where(w => materialsIds.Contains(w.MaterialsId));
+      }
+
+      var locationIds = filteredLocationsByName.Select(s => s.Id);
+
       var locations = db
-          .Locations
-          .Include(i => i.LocationMaterials).ThenInclude(t => t.Material)
-          .Where(w => locationsWithMaterials.Contains(w.Id));
-
-      ////connect to database v
-      //      var results = db.Locations.Include(i => i.LocationMaterials).ThenInclude(t => t.Material).Where(w =>
-      //  w.City.ToLower().Contains(searchTerm.ToLower()) ||
-      //  w.Zip.Contains(searchTerm) || w.CenterName.ToLower().Contains(searchTerm.ToLower()) ||
-      //  w.Address.ToLower().Contains(searchTerm.ToLower())  /*||
-
-      //  w.RecycleMeApi.Recycles.Contains(searchTerm.ToLower())
-      //  how to make searching for recycleables/ combinations of recyclables possible
-      //  including a dropdown filter next to search for recycleable type*/
-
-      //);
+                  .Locations
+                  .Include(i => i.LocationMaterials).ThenInclude(t => t.Material)
+                  .Where(w => locationIds.Contains(w.Id));
 
       return Ok(locations);
     }
