@@ -16,7 +16,7 @@ namespace RecycleMeApi.Controllers
 
     [HttpGet]
 
-    public ActionResult Get([FromQuery] String searchTerm, bool? plastics, bool? paper, bool? glass, bool? cardboard, bool? aluminum_cans, bool? electronics, bool? metal, bool? chemicals, bool? yard_waste)
+    public ActionResult Get([FromQuery] String searchTerm = null, bool? plastics = null, bool? paper = null, bool? glass = null, bool? cardboard = null, bool? aluminum_cans = null, bool? electronics = null, bool? metal = null, bool? chemicals = null, bool? yard_waste = null)
     {
       var db = new RecycleMeApiContext();
       Console.WriteLine("search term is " + searchTerm);
@@ -73,7 +73,7 @@ namespace RecycleMeApi.Controllers
       // Get the Ids of the materials we are searching for
       var materialsIds = db.Materials.Where(w => materials.Contains(w.MaterialType)).Select(s => s.Id);
 
-      searchTerm = searchTerm.ToLower();
+      searchTerm = searchTerm?.ToLower();
 
       // query the locationsMaterials table to select locations that have that 
       // This is where the filtering happens
@@ -82,7 +82,12 @@ namespace RecycleMeApi.Controllers
               .LocationMaterials
               .Include(i => i.Location)
               .Include(i => i.Material)
-              .Where(w => w.Location.CenterName.ToLower().Contains(searchTerm));
+              .AsQueryable();
+
+      if (searchTerm != null)
+      {
+        filteredLocationsByName = filteredLocationsByName.Where(w => w.Location.CenterName.ToLower().Contains(searchTerm));
+      }
 
       if (materialsIds.Any())
       {

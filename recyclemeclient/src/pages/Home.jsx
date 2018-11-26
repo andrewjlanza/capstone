@@ -51,7 +51,9 @@ class HomePage extends Component {
   }
 
   handleMaterialChoice = e => {
-    this.setState({ [e.target.value.toLowerCase()]: e.target.checked });
+    this.setState({ [e.target.value.toLowerCase()]: e.target.checked }, () => {
+      this.search();
+    });
     console.log(
       `Setting ${e.target.value.toLowerCase()} to ${e.target.checked}`
     );
@@ -64,7 +66,9 @@ class HomePage extends Component {
   };
 
   search = e => {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     axios
       .get(`http://localhost:5000/api/search`, {
         params: {
