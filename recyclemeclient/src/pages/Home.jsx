@@ -98,7 +98,16 @@ class HomePage extends Component {
       .get(`http://localhost:5000/api/search/nearby`, {
         params: {
           lat: this.props.coords.latitude,
-          lng: this.props.coords.longitude
+          lng: this.props.coords.longitude,
+          plastics: this.state.plastics,
+          paper: this.state.paper,
+          metal: this.state.metal,
+          electronics: this.state.electronics,
+          glass: this.state.glass,
+          chemicals: this.state.chemicals,
+          yard_waste: this.state.yard_waste,
+          cardboard: this.state.cardboard,
+          aluminum_cans: this.state.aluminum_cans
         }
       })
       .then(response => {

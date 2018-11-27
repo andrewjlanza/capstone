@@ -14,12 +14,9 @@ namespace RecycleMeApi.Controllers
   {
 
 
-    [HttpGet]
 
-    public ActionResult Get([FromQuery] String searchTerm = null, bool? plastics = null, bool? paper = null, bool? glass = null, bool? cardboard = null, bool? aluminum_cans = null, bool? electronics = null, bool? metal = null, bool? chemicals = null, bool? yard_waste = null)
+    private List<string> GetMaterialListFilter(bool? plastics = null, bool? paper = null, bool? glass = null, bool? cardboard = null, bool? aluminum_cans = null, bool? electronics = null, bool? metal = null, bool? chemicals = null, bool? yard_waste = null)
     {
-      var db = new RecycleMeApiContext();
-      Console.WriteLine("search term is " + searchTerm);
       Console.WriteLine("plastics is " + plastics);
       Console.WriteLine("paper is " + paper);
       Console.WriteLine("glass is " + glass);
@@ -69,7 +66,17 @@ namespace RecycleMeApi.Controllers
       {
         materials.Add("Yard Waste");
       }
+      return materials;
+    }
 
+    [HttpGet]
+
+    public ActionResult Get([FromQuery] String searchTerm = null, bool? plastics = null, bool? paper = null, bool? glass = null, bool? cardboard = null, bool? aluminum_cans = null, bool? electronics = null, bool? metal = null, bool? chemicals = null, bool? yard_waste = null)
+    {
+      var db = new RecycleMeApiContext();
+      Console.WriteLine("search term is " + searchTerm);
+
+      var materials = GetMaterialListFilter(plastics, paper, glass, cardboard, aluminum_cans, electronics, metal, chemicals, yard_waste);
       // Get the Ids of the materials we are searching for
       var materialsIds = db.Materials.Where(w => materials.Contains(w.MaterialType)).Select(s => s.Id);
 
@@ -106,10 +113,12 @@ namespace RecycleMeApi.Controllers
     }
 
     [HttpGet("nearby")]
-    public ActionResult GetNearBy([FromQuery] double lat, [FromQuery] double lng)
+    public ActionResult GetNearBy([FromQuery] double lat, [FromQuery] double lng, bool? plastics = null, bool? paper = null, bool? glass = null, bool? cardboard = null, bool? aluminum_cans = null, bool? electronics = null, bool? metal = null, bool? chemicals = null, bool? yard_waste = null)
     {
 
       var db = new RecycleMeApiContext();
+      var materials = GetMaterialListFilter(plastics, paper, glass, cardboard, aluminum_cans, electronics, metal, chemicals, yard_waste);
+
 
       var rv = (from location in db.Locations
                 let distance = Math.Sqrt(Math.Pow(location.Latitude - lat, 2) + Math.Pow(location.Longitude - lng, 2))        // where distance <= 10000

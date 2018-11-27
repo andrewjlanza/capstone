@@ -56,7 +56,8 @@ namespace RecycleMeApi
           new Location { Id = -11, CenterName = "Clearview United Methodist Drop-Off", Address = "4515 38th Ave N", City = "St. Petersburg", State = "FL", Zip = "34232", PhoneNumber = "", Rating = 4, Latitude = 27.342242, Longitude = -82.494311, weekdayHours = "", weekendHours = "" },
           new Location { Id = -12, CenterName = "Grace Lutheran Church Drop-Off", Address = "4364 15th St N", City = "St. Petersburg", State = "FL", Zip = "33703", PhoneNumber = "", Rating = 3, Latitude = 27.875891, Longitude = -82.675450, weekdayHours = "", weekendHours = "" },
           new Location { Id = -13, CenterName = "Municipal Marina Drop-Off", Address = "300 2nd Ave SE", City = "St. Petersburg", State = "FL", Zip = "33701", PhoneNumber = "", Rating = 4, Latitude = 27.342242, Longitude = -82.494311, weekdayHours = "", weekendHours = "" },
-          new Location { Id = -14, CenterName = "municipal", Address = "300 2nd Ave SE", City = "St. Petersburg", State = "FL", Zip = "33701", PhoneNumber = "", Rating = 4, Latitude = 27.342242, Longitude = -82.494311, weekdayHours = "", weekendHours = "" }
+          new Location { Id = -14, CenterName = "municipal", Address = "300 2nd Ave SE", City = "St. Petersburg", State = "FL", Zip = "33701", PhoneNumber = "", Rating = 4, Latitude = 27.342242, Longitude = -82.494311, weekdayHours = "", weekendHours = "" },
+          new Location { Id = -15, CenterName = "Tarpon Springs Drop-Off", Address = "1023 Gulf Rd", City = "Tarpon Springs", State = "FL", Zip = "34689", PhoneNumber = "", Rating = 4, Latitude = 27.342242, Longitude = -82.494311, weekdayHours = "", weekendHours = "" }
 
       );
       modelBuilder.Entity<Materials>().HasData(
