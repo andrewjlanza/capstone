@@ -8,12 +8,12 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div className="background-img">
           <nav
             className="navbar is-success"
             role="navigation"
             aria-label="main navigation"
-            /* href="/" */
+            href="/"
           >
             <div className="navbar-brand">
               <a className="navbar-item" href="/">

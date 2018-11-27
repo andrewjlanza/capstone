@@ -52,7 +52,13 @@ class HomePage extends Component {
 
   handleMaterialChoice = e => {
     this.setState({ [e.target.value.toLowerCase()]: e.target.checked }, () => {
-      this.search();
+      // TODO: we need some logic to determine which endpoint to hit
+      // track which button was clicked last
+      if (this.state.lastButtonClicked === "nearby") {
+        this.getNearby();
+      } else if (this.state.lastButtonClicked === "searchTerm") {
+        this.search();
+      }
     });
     console.log(
       `Setting ${e.target.value.toLowerCase()} to ${e.target.checked}`
@@ -87,7 +93,8 @@ class HomePage extends Component {
       .then(response => {
         console.log(response.data);
         this.setState({
-          locations: response.data
+          locations: response.data,
+          lastButtonClicked: "searchTerm"
         });
       });
   };
@@ -113,7 +120,8 @@ class HomePage extends Component {
       .then(response => {
         console.log(response.data);
         this.setState({
-          locations: response.data
+          locations: response.data,
+          lastButtonClicked: "nearby"
         });
       });
   };
@@ -125,6 +133,7 @@ class HomePage extends Component {
   render() {
     return (
       <div>
+        <h1>{this.state.lastButtonClicked}</h1>
         <form onSubmit={this.search}>
           <div className="field has-addons">
             <div className="control">
@@ -242,7 +251,7 @@ class HomePage extends Component {
               className="compass-img"
               onClick={this.getNearby}
               src="./compass.png"
-              alt=""
+              alt="Recycling centers near me"
             />
           </div>
         </form>
