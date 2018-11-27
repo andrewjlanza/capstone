@@ -41,8 +41,8 @@
 }
 
 nav.navbar.is-success {
-  border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 25px;
+  /*  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px; */
 }
 
 div.field.has-addons {
@@ -74,6 +74,8 @@ div.content li {
 .top-section {
   display: flex;
   justify-content: center;
+  z-index: 1;
+  margin-top: 23em;
 }
 .middle-section {
   display: flex;
@@ -168,3 +170,14 @@ h1 {
 /* .content {
   color: white;
 } */
+
+.mapWindow > div {
+  position: absolute;
+  border: 1px solid pink;
+  width: 100%;
+  height: 22em;
+}
+
+.details-page {
+  display: flex;
+}

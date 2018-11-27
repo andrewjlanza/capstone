@@ -133,7 +133,7 @@ class HomePage extends Component {
   render() {
     return (
       <div>
-        <h1>{this.state.lastButtonClicked}</h1>
+        {/* <h1>{this.state.lastButtonClicked}</h1> */}
         <form onSubmit={this.search}>
           <div className="field has-addons">
             <div className="control">
@@ -257,7 +257,7 @@ class HomePage extends Component {
         </form>
         <section className="recycle-me-list">
           <header className="results">
-            found <u>{this.state.locations.length}</u> recycling centers
+            Found <u>{this.state.locations.length}</u> recycling centers
           </header>
           <div className="card">
             {this.state.locations.map(center => {

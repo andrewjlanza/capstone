@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Map from "./Map";
 /* import App from "./App"; */
 /* import config from "../Config"; */
 
@@ -25,7 +26,10 @@ class Location extends Component {
 
   render() {
     return (
-      <div>
+      <div className="details-page">
+        <div className="mapWindow">
+          <Map location={this.state.location} />
+        </div>
         <section className="top-section">
           <img src="" alt="" />
           <section className="information">
@@ -71,24 +75,13 @@ class Location extends Component {
             })}
             <ul className="">
               Hours of Operation:
-              <li>{this.state.location.weekdayHours}</li>
+              <li>
+                {this.state.location.weekdayHours || "no weekday hours known"}
+              </li>
               <li>{this.state.location.weekendHours}</li>
             </ul>
           </li>
         </section>
-        {/* <section className="middle-section"> rating/ add a rating </section>
-        <section className="bottom-section">
-          <form>
-            <header>reviews!</header>
-            <textarea>heres some text</textarea>
-            <button>submit</button>
-          </form>
-          <ul>
-            <li>heres a review</li>
-            <lil>wow, another one!</lil>
-            <li>another review, holy smokes!</li>
-          </ul>
-        </section> */}
       </div>
     );
   }
