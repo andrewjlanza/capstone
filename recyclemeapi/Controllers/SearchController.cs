@@ -74,13 +74,14 @@ namespace RecycleMeApi.Controllers
     public ActionResult Get([FromQuery] String searchTerm = null, bool? plastics = null, bool? paper = null, bool? glass = null, bool? cardboard = null, bool? aluminum_cans = null, bool? electronics = null, bool? metal = null, bool? chemicals = null, bool? yard_waste = null)
     {
       var db = new RecycleMeApiContext();
+      searchTerm = searchTerm?.ToLower();
       Console.WriteLine("search term is " + searchTerm);
 
       var materials = GetMaterialListFilter(plastics, paper, glass, cardboard, aluminum_cans, electronics, metal, chemicals, yard_waste);
+
       // Get the Ids of the materials we are searching for
       var materialsIds = db.Materials.Where(w => materials.Contains(w.MaterialType)).Select(s => s.Id);
 
-      searchTerm = searchTerm?.ToLower();
 
       // query the locationsMaterials table to select locations that have that 
       // This is where the filtering happens
@@ -119,8 +120,30 @@ namespace RecycleMeApi.Controllers
       var db = new RecycleMeApiContext();
       var materials = GetMaterialListFilter(plastics, paper, glass, cardboard, aluminum_cans, electronics, metal, chemicals, yard_waste);
 
+      // Get the Ids of the materials we are searching for
+      var materialsIds = db.Materials.Where(w => materials.Contains(w.MaterialType)).Select(s => s.Id);
 
-      var rv = (from location in db.Locations
+      var filteredLocationsByName = db
+                .LocationMaterials
+                .Include(i => i.Location)
+                .Include(i => i.Material)
+                .AsQueryable();
+
+      if (materialsIds.Any())
+      {
+        filteredLocationsByName = filteredLocationsByName
+            .Where(w => materialsIds.Contains(w.MaterialsId));
+      }
+
+      var locationIds = filteredLocationsByName.Select(s => s.Id);
+
+      var locations = db
+                  .Locations
+                  .Include(i => i.LocationMaterials).ThenInclude(t => t.Material)
+                  .Where(w => locationIds.Contains(w.Id));
+
+
+      var rv = (from location in locations
                 let distance = Math.Sqrt(Math.Pow(location.Latitude - lat, 2) + Math.Pow(location.Longitude - lng, 2))        // where distance <= 10000
 
                 select new { location = location, Distance = distance }).OrderByDescending(o => o.Distance).Select(s => s.location).Include(i => i.LocationMaterials).ThenInclude(t => t.Material).Take(5);//.Take(5).OrderBy(x => x.distance).ToList();
