@@ -33,7 +33,10 @@ class Location extends Component {
         <section className="top-section">
           <img src="" alt="" />
           <section className="information">
-            <h1>{this.state.location.centerName}</h1>
+            <h1>
+              <strong>Name: </strong>
+              {this.state.location.centerName}
+            </h1>
             <a
               onClick={this._hideMenu}
               className="linkContact"
@@ -61,7 +64,8 @@ class Location extends Component {
               href="tel://{this.state.location.phoneNumber}"
             >
               <li className="menu-contact">
-                {this.state.location.phoneNumber}
+                {/* <strong>Phone: </strong> */}
+                {this.state.location.phoneNumber /* || "N/a" */}
               </li>
               <li> {this.state.location.itemsAccepted}</li>
             </a>
@@ -74,14 +78,17 @@ class Location extends Component {
               );
             })}
             <ul className="">
-              Hours of Operation:
-              <li>
-                {this.state.location.weekdayHours || "no weekday hours known"}
-              </li>
-              <li>{this.state.location.weekendHours}</li>
+              <strong>Hours of Operation:</strong>
+              <li>M-F: {this.state.location.weekdayHours || "N/a"}</li>
+              <li>Sat, Sun: {this.state.location.weekendHours || "N/a"}</li>
             </ul>
           </li>
+          {/*  <ul className="navcall">
+            <li>Navigate</li>
+            <li>Call</li>
+          </ul> */}
         </section>
+        <div />
       </div>
     );
   }

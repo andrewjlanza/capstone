@@ -135,19 +135,30 @@ class HomePage extends Component {
       <div>
         {/* <h1>{this.state.lastButtonClicked}</h1> */}
         <form onSubmit={this.search}>
+          <div className="more-info">
+            For more information about Pinellas County Recycling, {"  "}
+            <a target="_blank" href="https://www.stpete.org/recycle">
+              {"  "}
+              <u>click here</u>
+            </a>
+          </div>
           <div className="field has-addons">
             <div className="control">
-              <input
-                className="searchBar"
-                type="search"
-                onChange={this.handleSearchTermUpdate}
-                placeholder="Find a recycling center..."
-              />{" "}
+              <strong>
+                <input
+                  className="searchBar"
+                  type="search"
+                  onChange={this.handleSearchTermUpdate}
+                  placeholder="Find a recycling center..."
+                />{" "}
+              </strong>
             </div>
             {/*  <div className="control" /> */}
           </div>{" "}
           <div className="looking-to-recycle">
-            <strong>I'm looking to recycle:</strong>
+            <strong>
+              <u>I'm looking to recycle:</u>
+            </strong>
           </div>
           <br />
           <div className="checkbox-filter">

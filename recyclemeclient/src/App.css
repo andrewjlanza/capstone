@@ -72,10 +72,10 @@ div.content li {
 }
 
 .top-section {
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   z-index: 1;
-  margin-top: 23em;
+  margin-top: 21em;
 }
 .middle-section {
   display: flex;
@@ -155,7 +155,7 @@ h1 {
   margin-left: 10px;
 }
 .information {
-  margin-right: 10px;
+  margin-left: 10px;
 }
 
 /* .background-img {
@@ -180,4 +180,12 @@ h1 {
 
 .details-page {
   display: flex;
+}
+.navcall {
+  display: flex;
+  flex-direction: column;
+}
+
+.more-info {
+  margin-left: 5px;
 }
