@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
-
+using RecycleMeApi;
 
 namespace recyclemeapi
 {
@@ -21,6 +21,7 @@ namespace recyclemeapi
     public Startup(IConfiguration configuration)
     {
       Configuration = configuration;
+      new RecycleMeApiContext().Database.Migrate();
     }
 
     public IConfiguration Configuration { get; }
