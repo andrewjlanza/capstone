@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 /* import geolocation from "react-geolocation"; */
 import { geolocated } from "react-geolocated";
+import config from "../config";
 
 class HomePage extends Component {
   state = {
@@ -20,7 +21,7 @@ class HomePage extends Component {
   };
 
   componentDidMount() {
-    let _url = "https://localhost:5001/api";
+    let _url = `${config.API_URL}`;
     console.log({ props: this.props });
     if (this.props.match.params.searchTerm) {
       _url += `/search`;
@@ -76,7 +77,7 @@ class HomePage extends Component {
       e.preventDefault();
     }
     axios
-      .get(`http://localhost:5000/api/search`, {
+      .get(`${config.API_URL}/search`, {
         params: {
           searchTerm: this.state.searchTerm,
           plastics: this.state.plastics,
@@ -102,7 +103,7 @@ class HomePage extends Component {
   getNearby = () => {
     console.log("getting nearby");
     axios
-      .get(`http://localhost:5000/api/search/nearby`, {
+      .get(`${config.API_URL}/search/nearby`, {
         params: {
           lat: this.props.coords.latitude,
           lng: this.props.coords.longitude,

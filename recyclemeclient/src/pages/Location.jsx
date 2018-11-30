@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Map from "./Map";
+import config from "../config";
 /* import App from "./App"; */
 /* import config from "../Config"; */
 
@@ -15,7 +16,7 @@ class Location extends Component {
   // axios your API to get the information for the selected center
   componentDidMount() {
     axios
-      .get(`https://localhost:5001/api/locations/${this.props.match.params.id}`)
+      .get(`${config.API_URL}/locations/${this.props.match.params.id}`)
       .then(json => {
         this.setState({ location: json.data });
       });
